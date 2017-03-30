@@ -12,7 +12,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', (req, res) => {
-  res.json([{'123': 'wolf'}])
+  res.json([])
 });
 
 app.post('/', (req, res) => {
@@ -23,11 +23,8 @@ app.delete('/', (req, res) => {
   res.json({});
 });
 
-app.post('/', (req, res) => {
-  res.json([
-    {'title':'a todo'},
-    {}
-  ]);
+app.put('/', (req, res) => {
+  res.json([{'title':'a todo'}]);
 });
 
 app.listen(process.env.PORT || 8080);
