@@ -16,14 +16,14 @@ app.use(function(req, res, next) {
 
 
 app.get('/', (req, res) => {
-  // res.json([]);
-  knex.select('title', 'completed', 'id', 'url')
-  .from('todos')
-  .then(results => res.json(results));
+  res.json([]);
+  // knex.select('title', 'completed', 'id', 'url')
+  // .from('todos')
+  // .then(results => res.json(results));
 });
 
 
-app.post('/todo', (req, res) => {
+app.post('/', (req, res) => {
   res.json({'title':'a todo'});
 });
 
