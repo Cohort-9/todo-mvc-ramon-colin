@@ -17,9 +17,9 @@ app.use(function(req, res, next) {
 
 app.get('/', (req, res) => {
   res.json([]);
-  knex.select('title', 'completed', 'id', 'url')
-  .from('todos')
-  .then(results => res.json(results));
+  // knex.select('title', 'completed', 'id', 'url')
+  // .from('todos')
+  // .then(results => res.json(results));
 });
 
 
