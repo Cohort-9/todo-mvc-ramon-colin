@@ -24,12 +24,12 @@ app.delete('/', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.json([])
+  res.json([{'title':'a todo'}])
 });
 
-app.post('/', (req, res) => {
-  res.json([{'title':'a todo'}]);
-});
+// app.post('/', (req, res) => {
+//   res.json([{'title':'a todo'}]);
+// });
 
 app.listen(process.env.PORT || 8080);
 
