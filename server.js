@@ -17,16 +17,15 @@ app.use(function(req, res, next) {
 
 
 app.get('/', (req, res) => {
-  // res.json([]);
-  knex
-  .select('title', 'completed', 'id', 'url')
-  .from('todos')
-  .then(results => {
-    const output = results.map(todo => {
-      todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
-      return todo;
-    });
-    res.json(output);
+  res.json([]);
+  // knex.select('title', 'completed', 'id', 'url')
+  // .from('todos')
+  // .then(results => {
+  //   const output = results.map(todo => {
+  //     todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
+  //     return todo;
+  //   });
+  //   res.json(output)
 });
 
 
@@ -35,7 +34,12 @@ app.post('/', (req, res) => {
 });
 
 app.delete('/', (req, res) => {
-  res.json({});
+  // res.json({});
+  knex('todos')
+    .del()
+    .then(result => {
+      return res.status(202).send('delete success');
+    })
 });
 
 // app.post('/', (req, res) => {
