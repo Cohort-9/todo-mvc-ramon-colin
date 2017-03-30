@@ -11,8 +11,9 @@ app.use(function(req, res, next) {
   next();
 });
 
+
 app.get('/', (req, res) => {
-  res.json([])
+  res.json({})
 });
 
 app.post('/', (req, res) => {
@@ -21,10 +22,6 @@ app.post('/', (req, res) => {
 
 app.delete('/', (req, res) => {
   res.json({});
-});
-
-app.put('/', (req, res) => {
-  res.json({'title':'a todo'})
 });
 
 // app.post('/', (req, res) => {
