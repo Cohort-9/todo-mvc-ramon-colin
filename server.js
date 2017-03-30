@@ -35,7 +35,7 @@ app.post('/', (req, res) => {
 
 app.delete('/', (req, res) => {
   // res.json({});
-  knex('toDo')
+  knex(toDo)
     .del()
     .then(result => {
       return res.status(202).send('delete success');
