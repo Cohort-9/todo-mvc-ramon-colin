@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const {DEV} = require('./config');
 const knex = require('knex')(DEV);
 const app = express();
+let toDo = [];
 
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
@@ -16,10 +17,16 @@ app.use(function(req, res, next) {
 
 
 app.get('/', (req, res) => {
-  res.json([]);
-  // knex.select('title', 'completed', 'id', 'url')
-  // .from('todos')
-  // .then(results => res.json(results));
+  // res.json([]);
+  knex
+  .select('title', 'completed', 'id', 'url')
+  .from('todos')
+  .then(results => {
+    const output = results.map(todo => {
+      todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
+      return todo;
+    });
+    res.json(output);
 });
 
 
