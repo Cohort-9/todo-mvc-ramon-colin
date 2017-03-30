@@ -17,16 +17,16 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-  res.json([{'title':'a todo'}]);
+  res.json({'title':'a todo'});
 });
 
 app.delete('/', (req, res) => {
   res.json({});
 });
 
-// app.post('/', (req, res) => {
-//   res.json([{'title':'a todo'}]);
-// });
+app.post('/', (req, res) => {
+  res.json([{'title':'a todo'}]);
+});
 
 app.listen(process.env.PORT || 8080);
 
