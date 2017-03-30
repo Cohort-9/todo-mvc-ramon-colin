@@ -34,12 +34,12 @@ app.post('/', (req, res) => {
 });
 
 app.delete('/', (req, res) => {
-  // res.json({});
-  knex(toDo)
-    .del()
-    .then(result => {
-      return res.status(202).send('delete success');
-    })
+  res.json({});
+  // knex(toDo)
+  //   .del()
+  //   .then(result => {
+  //     return res.status(202).send('delete success');
+  //   })
 });
 
 // app.post('/', (req, res) => {
