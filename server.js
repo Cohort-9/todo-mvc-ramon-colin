@@ -23,8 +23,11 @@ app.delete('/', (req, res) => {
   res.json({});
 });
 
+app.get('/', (req, res) => {
+  res.json([])
+});
+
 app.post('/', (req, res) => {
-  res.json([]);
   res.json([{'title':'a todo'}]);
 });
 
