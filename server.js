@@ -12,7 +12,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', (req, res) => {
-  res.json([])
+  res.json([{'123': 'wolf'}])
 });
 
 app.post('/', (req, res) => {
@@ -24,7 +24,10 @@ app.delete('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-  res.json([{'title':'a todo'}]);
+  res.json([
+    {'title':'a todo'},
+    {}
+  ]);
 });
 
 app.listen(process.env.PORT || 8080);
