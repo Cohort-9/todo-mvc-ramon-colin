@@ -17,38 +17,55 @@ app.use(function(req, res, next) {
 
 
 app.get('/', (req, res) => {
-  res.json([]);
-  // knex.select('title', 'completed', 'id', 'url')
-  // .from('todos')
-  // .then(results => {
-  //   const output = results.map(todo => {
-  //     todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
-  //     return todo;
-  //   });
-  //   res.json(output)
+  knex.select('title', 'completed', 'id', 'url')
+  .from('todo')
+  .then(results => {
+    const output = results.map(function(todo) {
+      todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
+      console.log(todo.url);
+      return todo
+    });
+    res.json(output);
+  });  
 });
 
-
+// url: `${req.protocol}://${req.get('host')}/${todo.id}`
 app.post('/', (req, res) => {
-  res.json({'title':'a todo'});
+  knex('todo').insert({title: req.body.title})
+  .returning(['title', 'completed', 'id', 'url'])
+  .then( results => {
+    const output = results.map(function(todo) {
+      todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
+      console.log(todo.url);
+      return todo
+    });
+    res.json(output[0]);
+  });  
 });
+
+app.get('/:id', (req, res) => {
+  knex.select('title', 'id').from('todo')
+  .where({id: req.params.id})
+  // .returning(['title', 'completed', 'id', 'url'])
+  .then( results => {
+    const output = results.map(function(todo) {
+      todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
+      console.log(todo.url);
+      return todo
+    });
+    res.json(output[0]);
+  });  
+});
+
 
 app.delete('/', (req, res) => {
-  res.json({});
-  // knex(toDo)
-  //   .del()
-  //   .then(result => {
-  //     return res.status(202).send('delete success');
-  //   })
+  // res.json({});
+  knex('todo')
+    .del()
+    .then(result => {
+      return res.status(202).send('delete success');
+    });
 });
-
-// app.post('/', (req, res) => {
-//   knex.select('title', 'completed', 'id', 'url')
-//   .from('todos')
-//   .then(results => res.json(results));
-// });
-
-
 
 app.listen(process.env.PORT || 8080);
 
