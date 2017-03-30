@@ -23,8 +23,8 @@ app.delete('/', (req, res) => {
   res.json({});
 });
 
-app.get('/', (req, res) => {
-  res.json([{'title':'a todo'}])
+app.put('/', (req, res) => {
+  res.json({'title':'a todo'})
 });
 
 // app.post('/', (req, res) => {
