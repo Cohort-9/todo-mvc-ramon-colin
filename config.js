@@ -7,7 +7,7 @@ module.exports = {
     //   password: 'letmein',
     //   database: 'todo-list'
     // },
-    debug: true
+    debug: false
   },
   TEST: {
     client: 'pg',

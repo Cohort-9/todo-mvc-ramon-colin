@@ -17,7 +17,7 @@ app.use(function(req, res, next) {
 
 
 app.get('/', (req, res) => {
-  knex.select('title', 'completed', 'id', 'url')
+  knex.select('title', 'completed', 'id', 'url', 'order')
   .from('todo')
   .then(results => {
     const output = results.map(function(todo) {
@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 // url: `${req.protocol}://${req.get('host')}/${todo.id}`
 app.post('/', (req, res) => {
   knex('todo').insert({title: req.body.title})
-  .returning(['title', 'completed', 'id', 'url'])
+  .returning(['title', 'completed', 'id', 'url', 'order'])
   .then( results => {
     const output = results.map(function(todo) {
       todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
@@ -44,26 +44,53 @@ app.post('/', (req, res) => {
 });
 
 app.get('/:id', (req, res) => {
-  knex.select('title', 'id').from('todo')
+  knex.select('title', 'completed', 'id', 'url', 'order').from('todo')
   .where({id: req.params.id})
-  // .returning(['title', 'completed', 'id', 'url'])
+  .returning(['title', 'completed', 'id', 'url', 'order'])
   .then( results => {
     const output = results.map(function(todo) {
       todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
-      console.log(todo.url);
       return todo
     });
     res.json(output[0]);
   });  
 });
 
+app.patch('/:id', (req, res) => {
+  knex.select('title', 'completed', 'id', 'url', 'order').from('todo')
+  .where({id: req.params.id})
+  .update({title : req.body.title,
+    completed: req.body.completed
+  })
+  .returning(['title', 'completed', 'id', 'url', 'order'])
+  .then( results => {
+    const output = results.map(function(todo) {
+      todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
+      return todo
+    })
+    res.json(output[0]);
+  })
+  .catch( err => {
+    console.log(err)
+    res.status(500).send('patch failure!')
+  });
+});
+
+app.delete('/:id', (req, res) => {
+  knex.select('title', 'completed', 'id', 'url', 'order').from('todo')
+  .where({id: req.params.id})
+  .del()
+  .then( results => {
+    return res.status(204).send('blogpost delete success');
+  });
+});
 
 app.delete('/', (req, res) => {
   // res.json({});
   knex('todo')
     .del()
     .then(result => {
-      return res.status(202).send('delete success');
+      return res.status(204).send('delete success');
     });
 });
 
