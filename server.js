@@ -31,7 +31,10 @@ app.get('/', (req, res) => {
 
 // url: `${req.protocol}://${req.get('host')}/${todo.id}`
 app.post('/', (req, res) => {
-  knex('todo').insert({title: req.body.title})
+  knex('todo')
+  .insert({title: req.body.title,
+    order: req.body.order
+  })
   .returning(['title', 'completed', 'id', 'url', 'order'])
   .then( results => {
     const output = results.map(function(todo) {
@@ -44,9 +47,9 @@ app.post('/', (req, res) => {
 });
 
 app.get('/:id', (req, res) => {
-  knex.select('title', 'completed', 'id', 'url', 'order').from('todo')
+  knex.select('title', 'completed', 'id', 'url', 'order')
+  .from('todo')
   .where({id: req.params.id})
-  .returning(['title', 'completed', 'id', 'url', 'order'])
   .then( results => {
     const output = results.map(function(todo) {
       todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
@@ -57,10 +60,11 @@ app.get('/:id', (req, res) => {
 });
 
 app.patch('/:id', (req, res) => {
-  knex.select('title', 'completed', 'id', 'url', 'order').from('todo')
+  knex('todo')
   .where({id: req.params.id})
   .update({title : req.body.title,
-    completed: req.body.completed
+    completed: req.body.completed,
+    order: req.body.order
   })
   .returning(['title', 'completed', 'id', 'url', 'order'])
   .then( results => {
@@ -77,7 +81,8 @@ app.patch('/:id', (req, res) => {
 });
 
 app.delete('/:id', (req, res) => {
-  knex.select('title', 'completed', 'id', 'url', 'order').from('todo')
+  knex.select('title', 'completed', 'id', 'url', 'order')
+  .from('todo')
   .where({id: req.params.id})
   .del()
   .then( results => {
