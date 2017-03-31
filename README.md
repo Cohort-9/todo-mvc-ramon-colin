@@ -9,8 +9,9 @@ Using these libraries as a framework for our build helped us refine our general 
 <br>
 Our build is a rare combination and it appears knex has not been officially added as a successfully developed framework for the project. 
 <br>
-<b>
-you'll be using these links as entry points to the backend. <br>
+<br>
+you'll be using these links as entry points to the backend. 
+<br>
 Front-end API root: http://www.todobackend.com/specs/index.html <br>
 Back-end API root:  https://www.todobackend.com/client/index.html <br>
 
