@@ -2,6 +2,7 @@
 ***description***: Thinkful Capstone II<br>
 ***assignment***: Backend framework for the popular http://todomvc.com/ <br>
 ***authors***: Ramon Reyes(@reyesjunk) + Colin Van Sickle (@cfv7)<br>
+/*---------------------------------------------------------------------*/
 
 Our project is a knex postgreSQL-based server-side build that fulfills the challenges outlined  http://todobackend.com/.
 
