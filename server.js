@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+require('dotenv').config();
 const {DEV} = require('./config');
 const knex = require('knex')(DEV);
 const app = express();

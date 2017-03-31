@@ -1,12 +1,12 @@
 module.exports = {
   DEV: {
     client: 'pg',
-    connection:process.env.DATABASE_URL,
+    connection: process.env.DATABASE_URL,
     debug: false
   },
   TEST: {
     client: 'pg',
-   connection:process.env.DATABASE_URL_TEST,
+    connection: process.env.DATABASE_URL_TEST,
     debug: true
   },
   PROD: {},
