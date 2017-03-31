@@ -4,7 +4,6 @@ require('dotenv').config();
 const {DEV} = require('./config');
 const knex = require('knex')(DEV);
 const app = express();
-let toDo = [];
 
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
@@ -16,21 +15,19 @@ app.use(function(req, res, next) {
   next();
 });
 
-
 app.get('/', (req, res) => {
-  knex.select('title', 'completed', 'id', 'url', 'order')
+  knex
+  .select('title', 'completed', 'id', 'url', 'order')
   .from('todo')
   .then(results => {
     const output = results.map(function(todo) {
       todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
-      console.log(todo.url);
       return todo
     });
     res.json(output);
   });  
 });
 
-// url: `${req.protocol}://${req.get('host')}/${todo.id}`
 app.post('/', (req, res) => {
   knex('todo')
   .insert({title: req.body.title,
@@ -48,7 +45,8 @@ app.post('/', (req, res) => {
 });
 
 app.get('/:id', (req, res) => {
-  knex.select('title', 'completed', 'id', 'url', 'order')
+  knex
+  .select('title', 'completed', 'id', 'url', 'order')
   .from('todo')
   .where({id: req.params.id})
   .then( results => {
@@ -82,7 +80,8 @@ app.patch('/:id', (req, res) => {
 });
 
 app.delete('/:id', (req, res) => {
-  knex.select('title', 'completed', 'id', 'url', 'order')
+  knex
+  .select('title', 'completed', 'id', 'url', 'order')
   .from('todo')
   .where({id: req.params.id})
   .del()
@@ -92,7 +91,6 @@ app.delete('/:id', (req, res) => {
 });
 
 app.delete('/', (req, res) => {
-  // res.json({});
   knex('todo')
     .del()
     .then(result => {
