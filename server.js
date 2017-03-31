@@ -15,16 +15,19 @@ app.use(function(req, res, next) {
   next();
 });
 
+function outputId(results, req) {
+  return results.map(function(todo) {
+    todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
+    return todo
+  });
+}
+
 app.get('/', (req, res) => {
   knex
   .select('title', 'completed', 'id', 'url', 'order')
   .from('todo')
   .then(results => {
-    const output = results.map(function(todo) {
-      todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
-      return todo
-    });
-    res.json(output);
+    res.json(outputId(results, req));
   });  
 });
 
@@ -35,12 +38,7 @@ app.post('/', (req, res) => {
   })
   .returning(['title', 'completed', 'id', 'url', 'order'])
   .then( results => {
-    const output = results.map(function(todo) {
-      todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
-      console.log(todo.url);
-      return todo
-    });
-    res.json(output[0]);
+    res.json(outputId(results, req)[0]);
   });  
 });
 
@@ -50,11 +48,7 @@ app.get('/:id', (req, res) => {
   .from('todo')
   .where({id: req.params.id})
   .then( results => {
-    const output = results.map(function(todo) {
-      todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
-      return todo
-    });
-    res.json(output[0]);
+    res.json(outputId(results, req)[0]);
   });  
 });
 
@@ -67,11 +61,7 @@ app.patch('/:id', (req, res) => {
   })
   .returning(['title', 'completed', 'id', 'url', 'order'])
   .then( results => {
-    const output = results.map(function(todo) {
-      todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
-      return todo
-    })
-    res.json(output[0]);
+    res.json(outputId(results, req)[0]);
   })
   .catch( err => {
     console.log(err)
