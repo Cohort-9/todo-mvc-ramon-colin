@@ -16,7 +16,7 @@ further reading:<br>
 https://github.com/postgres/postgres <- postgres documentation <br>
 http://knexjs.org/#Builder <- knex documentation <br>
 
-## I) install dependencies
+## 1) install dependencies
 ```
 // cd into your project in terminal;
 >npm install
@@ -28,10 +28,10 @@ http://knexjs.org/#Builder <- knex documentation <br>
 >nodemon server.js
 
 ```
-## II) setting up your postgres db (local & elephantSQL)
-you have two options 1) local db or 2) elephantSQL.
+## 2) setting up your postgres db (local & elephantSQL)
+you have two options a) local db or b) elephantSQL.
 Remember, you’ll need to use elephantSQL to store your data online once your app has been deployed to heroku and travis. 
-### 1) local db
+### a) local db
 ```
 // if you don't have postgres db installed already make sure you do
 >brew install postgres
@@ -44,7 +44,7 @@ Remember, you’ll need to use elephantSQL to store your data online once your a
 // enter psql shell
 >psql -U dev
 ```
-### 2) elephantSQL db
+### b) elephantSQL db
 Go to https://www.elephantsql.com/ and create an account. <br>
 Sign up directly, or join through GitHub / GMail.<br>
 IMAGE
@@ -52,7 +52,7 @@ This service creates  your database for you so to enter the database in terminal
 You’ll only need to include the link.  The creation of table is nearly identical
 When you go to the dashboard you should see an option for creating a new database instance.
 
-## III) creating the data
+## 3) creating the data
 ```
 >CREATE TABLE todos(
   >id serial PRIMARY KEY,
@@ -62,7 +62,7 @@ When you go to the dashboard you should see an option for creating a new databas
 >”order” integer);
 //Note that order is a reserved word and needs to be in quotations.
 ```
-## IV) explaining how to use todobackend.com
+## 4) explaining how to use todobackend.com
 
 
 
