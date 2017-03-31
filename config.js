@@ -1,22 +1,12 @@
 module.exports = {
   DEV: {
     client: 'pg',
-    connection:'postgres://ghnufhnx:qI4AZzMvCoiaB-L0ty990gL85h4p-723@stampy.db.elephantsql.com:5432/ghnufhnx',
-    // connection: {
-    //   user: 'dev',
-    //   password: 'letmein',
-    //   database: 'todo-list'
-    // },
+    connection:process.env.DATABASE_URL,
     debug: false
   },
   TEST: {
     client: 'pg',
-    connection:'postgres://ghnufhnx:qI4AZzMvCoiaB-L0ty990gL85h4p-723@stampy.db.elephantsql.com:5432/ghnufhnx',
-    // connection: {
-    //   user: 'dev',
-    //   password: 'letmein',
-    //   database: 'todo-list'
-    // },
+   connection:process.env.DATABASE_URL_TEST,
     debug: true
   },
   PROD: {},
