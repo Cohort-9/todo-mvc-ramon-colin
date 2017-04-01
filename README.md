@@ -1,72 +1,56 @@
-# todo-mvc-backend-knex
-***description***: Thinkful Capstone II<br>
-***assignment***: Backend framework for the popular http://todomvc.com/ <br>
-***authors***: Ramon Reyes(@reyesjunk) + Colin Van Sickle (@cfv7)<br>
-/*---------------------------------------------------------------------*/
+# ToDo MVC Backend 
+##### Developed by Ramon Reyes @reyesjunk & Colin Van Sickle @cfv7<br>
 
-Our project is a knex postgreSQL-based server-side build that fulfills the challenges outlined  http://todobackend.com/.
+[![Build Status](https://travis-ci.org/Cohort-9/todo-ramon-colin.svg?branch=master)](https://travis-ci.org/Cohort-9/todo-ramon-colin)
+#### Introduction
+This project uses server-side frameworks via RESTful API endpoints to mirror the functionality of the [ToDoMVC](http://todomvc.com/) client. It uses [Express.js](http://expressjs.com), [Knex.js](http://knexjs.com), and stores the list on a [PostgreSQL](https://www.postgresql.org)L database hosted on [ElephantSQL](https://www.elephantsql.com/).
 
-Todobackend is a series of functionality and HTTP tests for those who create server-side models of [TodoMVC]( http://todomvc.com/). Developers can create and compare different frameworks and combinations which can create asimple todolist API.
-<br>
-This code passes all of the specs outlined and required in the back-end using two [postgreSQL](https://www.postgresql.org) and [Knex] (http://knexjs.com).
-Using these libraries as a framework for our build helped us refine our general understanding of SQL, postgres, knex, express, travis, mocha, chai, heroku, and dotenv technologies.
-<br>
-Our build is a rare combination and it appears knex has not been officially added as a successfully developed framework for the project. 
-<br>
-<br>
-you'll be using these links as entry points to the backend:<br>
-Front-end API root: http://www.todobackend.com/specs/index.html <br>
-Back-end API root:  https://www.todobackend.com/client/index.html <br>
+Here's a brief description taken from [Todo-Backend's](http://www.todobackend.com/) website:
 
-further documentation:<br>
+>"The Todo-Backend project helps showcase and compare different language and framework combinations for building web services. This website defines a simple web API in the form of a todo list and users can create their own identical APIs using various tech stacks. This website then provides a spec runner to verify that the user implementation is identical to the base implementation."
+
+Our build (Express, Knex, and PostgreSQL) is one of few server-side framework combinations that has not been featured on  [Todo-Backend's](http://www.todobackend.com/) homepage as a successfully developed framework for the project.
+<br>
+<br>
+#### You'll be using these links as entry points to the backend:<br>
+Client-side API root: http://www.todobackend.com/specs/index.html <br>
+Server-side API root:  https://www.todobackend.com/client/index.html <br>
+
+#### Further documentation:<br>
 https://github.com/postgres/postgres <- postgres documentation <br>
 http://knexjs.org/#Builder <- knex documentation <br>
 
 ## 1) install dependencies
 ```
-// cd into your project in terminal;
+// cd into your project in terminal 
 >npm install
-
-// make sure all other servers are turned off
->npm start 
-
-// optionally you can also use nodemon
->nodemon server.js
-
 ```
-## 2) setting up your postgres db (local & elephantSQL)
+## 2) setting up your postgres database (local & elephantSQL)
 you have two options a) local db or b) elephantSQL.
-Remember, you’ll need to use elephantSQL to store your data online once your app has been deployed to heroku and travis. 
 ### a) local db
 ```
 // if you don't have postgres db installed already make sure you do
->brew install postgres
-// check which user you are 
->whoami
-// create a new user
->createuser -Pw --interactive 
-//create a new db, substitute whichever user you’ve just made for ‘dev’ 
->createdb dev -U todo-list
+> brew install postgres
+// it is recommended you create a new user
+> createuser -Pw --interactive 
+// create a new db, substitute whichever user you’ve just made for ‘dev’ 
+> createdb dev -U todo-list
 // enter psql shell
->psql -U dev
+> psql -U dev todo-list
 ```
 ### b) elephantSQL db
-Go to https://www.elephantsql.com/ and create an account. <br>
-Sign up directly, or join through GitHub / GMail.<br>
-IMAGE
-This service creates  your database for you so to enter the database in terminal’s psql shell
-You’ll only need to include the link.  The creation of table is nearly identical
-When you go to the dashboard you should see an option for creating a new database instance.
+* Go to https://www.elephantsql.com/ and create an account. <br>
+* This service creates a remote and active database online which can be entered via terminal’s psql shell
+```
+// the link in the 'URL' field of the 'Details' page post-db creation connects you to the db in terminal
+// the link below is fake but I have it here to show how your 'URL' should look 
+psql postgres://aslkfj;lfwlkfp-5456@stampy.db.elephantsql.com:sdfa/ascwefevq 
+```
 
 ## 3) creating the data
 ```
->CREATE TABLE todos(
-  >id serial PRIMARY KEY,
-  >title text  NOT NULL,
-  >content boolean DEFAULT FALSE,
-  >url text
->”order” integer);
-//Note that order is a reserved word and needs to be in quotations.
+// Note that order is a reserved word and needs to be in quotations.
+CREATE TABLE todos(id serial PRIMARY KEY, title text  NOT NULL, content boolean DEFAULT FALSE, url text, ”order” integer);
 ```
 ## 4) explaining how to use todobackend.com
 
