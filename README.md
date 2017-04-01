@@ -13,8 +13,8 @@ Our build (Express, Knex, and PostgreSQL) is one of few server-side framework co
 <br>
 <br>
 #### You'll be using these links as entry points to the backend:<br>
-Client-side API root: http://www.todobackend.com/specs/index.html <br>
-Server-side API root:  https://www.todobackend.com/client/index.html <br>
+Server-side API root: http://www.todobackend.com/specs/index.html <br>
+Client-side API root:  https://www.todobackend.com/client/index.html <br>
 
 #### Further documentation:<br>
 https://github.com/postgres/postgres <- postgres documentation <br>
@@ -23,10 +23,11 @@ http://knexjs.org/#Builder <- knex documentation <br>
 ## 1) install dependencies
 ```
 // cd into your project in terminal 
->npm install
+> npm install
 ```
 ## 2) setting up your postgres database (local & elephantSQL)
-you have two options a) local db or b) elephantSQL.
+you have two options a) local db or b) elephantSQL db.
+we recommend you use elephantSQL.
 ### a) local db
 ```
 // if you don't have postgres db installed already make sure you do
@@ -44,15 +45,18 @@ you have two options a) local db or b) elephantSQL.
 ```
 // the link in the 'URL' field of the 'Details' page post-db creation connects you to the db in terminal
 // the link below is fake but I have it here to show how your 'URL' should look 
-psql postgres://aslkfj;lfwlkfp-5456@stampy.db.elephantsql.com:sdfa/ascwefevq 
+> psql postgres://aslkfj;lfwlkfp-5456@stampy.db.elephantsql.com:sdfa/ascwefevq 
 ```
 
 ## 3) creating the data
 ```
 // Note that order is a reserved word and needs to be in quotations.
-CREATE TABLE todos(id serial PRIMARY KEY, title text  NOT NULL, content boolean DEFAULT FALSE, url text, ”order” integer);
+> CREATE TABLE todos(id serial PRIMARY KEY, title text  NOT NULL, content boolean DEFAULT FALSE, url text, ”order” integer);
 ```
-## 4) explaining how to use todobackend.com
+## 4) starting the server
+```
+> npm start 
+```
 
 
 
