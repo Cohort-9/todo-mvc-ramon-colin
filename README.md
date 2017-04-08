@@ -1,6 +1,5 @@
 # ToDo MVC Backend 
 ##### Developed by Ramon Reyes & Colin Van Sickle <br>
-<br>
 [![Build Status](https://travis-ci.org/Cohort-9/todo-ramon-colin.svg?branch=master)](https://travis-ci.org/Cohort-9/todo-ramon-colin)
 #### Introduction
 This project uses server-side frameworks via RESTful API endpoints to mirror the functionality of the [ToDoMVC](http://todomvc.com/) client. It uses [Express.js](http://expressjs.com), [Knex.js](http://knexjs.com), and stores the list on a [PostgreSQL](https://www.postgresql.org)L database hosted on [ElephantSQL](https://www.elephantsql.com/).
