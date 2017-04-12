@@ -17,67 +17,66 @@ app.use(function(req, res, next) {
 
 function outputId(results, req) {
   return results.map(function(todo) {
-    todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`
-    return todo
+    todo.url = `${req.protocol}://${req.get('host')}/${todo.id}`;
+    return todo;
   });
 }
 
 app.get('/', (req, res) => {
   knex
-  .select('title', 'completed', 'id', 'url', 'order')
-  .from('todo')
-  .then(results => {
-    res.json(outputId(results, req));
-  });  
+    .select('title', 'completed', 'id', 'url', 'order')
+    .from('todo')
+    .then(results => {
+      res.json(outputId(results, req));
+    });  
 });
 
 app.post('/', (req, res) => {
   knex('todo')
-  .insert({title: req.body.title,
-    order: req.body.order
-  })
-  .returning(['title', 'completed', 'id', 'url', 'order'])
-  .then( results => {
-    res.json(outputId(results, req)[0]);
-  });  
+    .insert({title: req.body.title,
+      order: req.body.order
+    }) //<--- can be just  .insert(req.body);
+    .returning(['title', 'completed', 'id', 'url', 'order'])
+    .then( results => {
+      res.json(outputId(results, req)[0]);
+    });  
 });
 
 app.get('/:id', (req, res) => {
   knex
-  .select('title', 'completed', 'id', 'url', 'order')
-  .from('todo')
-  .where({id: req.params.id})
-  .then( results => {
-    res.json(outputId(results, req)[0]);
-  });  
+    .select('title', 'completed', 'id', 'url', 'order')
+    .from('todo')
+    .where({id: req.params.id})
+    .then( results => {
+      res.json(outputId(results, req)[0]);
+    });  
 });
 
 app.patch('/:id', (req, res) => {
   knex('todo')
-  .where({id: req.params.id})
-  .update({title : req.body.title,
-    completed: req.body.completed,
-    order: req.body.order
-  })
-  .returning(['title', 'completed', 'id', 'url', 'order'])
-  .then( results => {
-    res.json(outputId(results, req)[0]);
-  })
-  .catch( err => {
-    console.log(err)
-    res.status(500).send('patch failure!')
-  });
+    .where({id: req.params.id})
+    .update({title : req.body.title,
+      completed: req.body.completed,
+      order: req.body.order
+    }) //<--- can be just  .update(req.body);
+    .returning(['title', 'completed', 'id', 'url', 'order'])
+    .then( results => {
+      res.json(outputId(results, req)[0]);
+    })
+    .catch( err => {
+     console.log(err)
+      res.status(500).send('patch failure!')
+    });
 });
 
 app.delete('/:id', (req, res) => {
   knex
-  .select('title', 'completed', 'id', 'url', 'order')
-  .from('todo')
-  .where({id: req.params.id})
-  .del()
-  .then( results => {
-    return res.status(204).send('blogpost delete success');
-  });
+    .from('todo')
+    .where({id: req.params.id})
+    .del()
+    .then( results => {
+      return res.status(204).send('blogpost delete success');
+    });
 });
 
 app.delete('/', (req, res) => {
